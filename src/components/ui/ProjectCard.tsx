@@ -68,7 +68,13 @@ export default function ProjectCard({
         <span className="absolute left-6 top-6 font-mono-label text-xs text-muted">
           0{index + 1}
         </span>
-        <span className="absolute right-6 top-6 font-mono-label text-xs text-muted">
+        <span className="absolute right-6 top-6 flex items-center gap-2 font-mono-label text-xs text-muted">
+          {project.liveUrl ? (
+            <span className="flex items-center gap-1.5 text-cyan">
+              <span className="h-1.5 w-1.5 rounded-full bg-cyan" />
+              Live
+            </span>
+          ) : null}
           {project.year}
         </span>
         <div className="absolute inset-x-6 bottom-6">
