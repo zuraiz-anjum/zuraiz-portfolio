@@ -1,7 +1,19 @@
 import Reveal from "@/components/ui/Reveal";
 import ScrambleLink from "@/components/ui/ScrambleLink";
+import ProofLink from "@/components/ui/ProofLink";
 
-const ROLES = [
+type Role = {
+  period: string;
+  role: string;
+  org: string;
+  href: string;
+  domain: string;
+  location: string;
+  detail: string;
+  proof?: string;
+};
+
+const ROLES: Role[] = [
   {
     period: "Jul 2026 — Present",
     role: "RL Engineer",
@@ -73,9 +85,12 @@ export default function Experience() {
                     {item.location} · {item.domain}
                   </p>
                 </div>
-                <p className="max-w-xl text-sm leading-relaxed text-muted md:text-base">
-                  {item.detail}
-                </p>
+                <div>
+                  <p className="max-w-xl text-sm leading-relaxed text-muted md:text-base">
+                    {item.detail}
+                  </p>
+                  <ProofLink href={item.proof} />
+                </div>
               </div>
             </Reveal>
           ))}

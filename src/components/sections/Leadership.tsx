@@ -1,12 +1,24 @@
 import Reveal from "@/components/ui/Reveal";
 import ScrambleLink from "@/components/ui/ScrambleLink";
+import ProofLink from "@/components/ui/ProofLink";
 
-const LEADERSHIP = [
+type LeadershipItem = {
+  role: string;
+  org: string;
+  href?: string;
+  context: string;
+  period?: string;
+  detail: string;
+  proof?: string;
+};
+
+const LEADERSHIP: LeadershipItem[] = [
   {
     role: "Aspire Leader",
     org: "Aspire Leaders Program",
     href: "https://www.aspireleaders.org/program/aspire-leaders-program/",
     context: "Founded at Harvard",
+    period: "Jul 22 — Sep 20, 2026",
     detail:
       "A nine-week leadership program with a curriculum designed and taught by Harvard faculty, selected from a global cohort spanning 195 countries.",
   },
@@ -57,11 +69,17 @@ export default function Leadership() {
                 ) : (
                   <p className="text-sm text-cyan">{item.org}</p>
                 )}
+                {item.period ? (
+                  <p className="font-mono-label mt-1 text-[0.65rem] text-muted">
+                    {item.period}
+                  </p>
+                ) : null}
                 {item.detail ? (
                   <p className="mt-3 text-sm leading-relaxed text-muted">
                     {item.detail}
                   </p>
                 ) : null}
+                <ProofLink href={item.proof} />
               </div>
             </Reveal>
           ))}
