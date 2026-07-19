@@ -21,16 +21,19 @@ const LEADERSHIP: LeadershipItem[] = [
     period: "Jul 22 — Sep 20, 2026",
     detail:
       "A nine-week leadership program with a curriculum designed and taught by Harvard faculty, selected from a global cohort spanning 195 countries.",
+    proof: "/proof/aspire-leaders-program.png",
   },
   {
     role: "Logistics Head",
     org: "SOFTEC",
+    href: "https://softecnu.org/",
     context: "FAST-NUCES",
     detail: "Large-scale student-run tech festival.",
   },
   {
     role: "Head of Management",
     org: "NUCES Media Group",
+    href: "https://www.instagram.com/nucesmediagroup/?hl=en",
     context: "FAST-NUCES",
     detail: "",
   },

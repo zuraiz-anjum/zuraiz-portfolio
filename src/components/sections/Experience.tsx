@@ -33,6 +33,7 @@ const ROLES: Role[] = [
     location: "Internship",
     detail:
       "Supporting applied data science and AI engagements for enterprise clients on a global product-engineering team — data pipelines, model prototyping, and analysis work.",
+    proof: "/proof/10pearls-candidate-portal.png",
   },
   {
     period: "Nov 2025 — Jun 2026",
