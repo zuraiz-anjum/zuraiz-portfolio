@@ -3,6 +3,8 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "@/lib/gsap";
 
+const HOVERABLE_SELECTOR = "a, button, [data-cursor='hover']";
+
 export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
@@ -27,26 +29,29 @@ export default function CustomCursor() {
       ringX(e.clientX);
       ringY(e.clientY);
     };
-    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mousemove", onMove, { passive: true });
 
-    const hoverables = "a, button, [data-cursor='hover']";
-    const onEnter = () => ring.setAttribute("data-hover", "true");
-    const onLeave = () => ring.setAttribute("data-hover", "false");
-
-    const attach = () => {
-      document.querySelectorAll(hoverables).forEach((el) => {
-        el.addEventListener("mouseenter", onEnter);
-        el.addEventListener("mouseleave", onLeave);
-      });
+    // Event delegation instead of per-element listeners: works for any
+    // element added/removed later (SplitText, ScrollTrigger pin-spacers,
+    // etc.) with exactly one listener pair, ever.
+    const onOver = (e: MouseEvent) => {
+      if ((e.target as Element)?.closest?.(HOVERABLE_SELECTOR)) {
+        ring.setAttribute("data-hover", "true");
+      }
     };
-    attach();
-
-    const observer = new MutationObserver(attach);
-    observer.observe(document.body, { childList: true, subtree: true });
+    const onOut = (e: MouseEvent) => {
+      const related = e.relatedTarget as Element | null;
+      if (!related?.closest?.(HOVERABLE_SELECTOR)) {
+        ring.setAttribute("data-hover", "false");
+      }
+    };
+    window.addEventListener("mouseover", onOver, { passive: true });
+    window.addEventListener("mouseout", onOut, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", onMove);
-      observer.disconnect();
+      window.removeEventListener("mouseover", onOver);
+      window.removeEventListener("mouseout", onOut);
     };
   }, []);
 

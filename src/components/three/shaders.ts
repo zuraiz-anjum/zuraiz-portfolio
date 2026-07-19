@@ -46,10 +46,11 @@ export const fragmentShader = /* glsl */ `
     return 130.0 * dot(m, g);
   }
 
-  float fbm(vec2 p) {
+  float fbm(vec2 p, int octaves) {
     float value = 0.0;
     float amplitude = 0.5;
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 3; i++) {
+      if (i >= octaves) break;
       value += amplitude * snoise(p);
       p *= 2.0;
       amplitude *= 0.5;
@@ -67,10 +68,10 @@ export const fragmentShader = /* glsl */ `
 
     float t = uTime * 0.045;
 
-    vec2 warpA = vec2(fbm(p * 1.1 + t), fbm(p * 1.1 - t * 0.8));
+    vec2 warpA = vec2(fbm(p * 1.1 + t, 2), fbm(p * 1.1 - t * 0.8, 2));
     vec2 warped = p + warpA * 0.35;
-    float n = fbm(warped * 1.6 + t * 0.6);
-    float n2 = fbm(warped * 2.4 - t * 0.4 + 4.2);
+    float n = fbm(warped * 1.6 + t * 0.6, 3);
+    float n2 = fbm(warped * 2.4 - t * 0.4 + 4.2, 3);
 
     float dist = length(p);
     float vignette = smoothstep(1.15, 0.15, dist);

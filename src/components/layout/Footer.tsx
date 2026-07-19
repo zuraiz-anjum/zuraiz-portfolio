@@ -27,6 +27,12 @@ export default function Footer() {
             >
               github.com/zuraiz-anjum
             </ScrambleLink>
+            <ScrambleLink
+              href="https://www.linkedin.com/in/zuraiz-anjum/"
+              className="text-sm text-foreground hover:text-violet"
+            >
+              linkedin.com/in/zuraiz-anjum
+            </ScrambleLink>
           </div>
         </div>
       </div>

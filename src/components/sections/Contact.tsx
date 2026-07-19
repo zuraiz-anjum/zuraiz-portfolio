@@ -49,6 +49,19 @@ export default function Contact() {
             </div>
             <div>
               <span className="font-mono-label text-xs text-muted">
+                LinkedIn
+              </span>
+              <p className="mt-2">
+                <ScrambleLink
+                  href="https://www.linkedin.com/in/zuraiz-anjum/"
+                  className="text-sm text-foreground hover:text-violet"
+                >
+                  linkedin.com/in/zuraiz-anjum
+                </ScrambleLink>
+              </p>
+            </div>
+            <div>
+              <span className="font-mono-label text-xs text-muted">
                 Currently
               </span>
               <p className="mt-2 text-sm text-foreground">

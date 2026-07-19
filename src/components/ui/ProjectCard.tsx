@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { gsap } from "@/lib/gsap";
 import type { Project } from "@/lib/projects";
@@ -19,30 +19,34 @@ export default function ProjectCard({
   index: number;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
+  const quickRef = useRef<{
+    x: (v: number) => void;
+    y: (v: number) => void;
+  } | null>(null);
+
+  useEffect(() => {
+    const card = cardRef.current;
+    if (!card) return;
+    gsap.set(card, { transformPerspective: 900 });
+    quickRef.current = {
+      x: gsap.quickTo(card, "rotateY", { duration: 0.4, ease: "power2.out" }),
+      y: gsap.quickTo(card, "rotateX", { duration: 0.4, ease: "power2.out" }),
+    };
+  }, []);
 
   const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const card = cardRef.current;
-    if (!card) return;
+    if (!card || !quickRef.current) return;
     const rect = card.getBoundingClientRect();
     const px = (e.clientX - rect.left) / rect.width - 0.5;
     const py = (e.clientY - rect.top) / rect.height - 0.5;
-
-    gsap.to(card, {
-      rotateX: py * -8,
-      rotateY: px * 8,
-      duration: 0.4,
-      ease: "power2.out",
-      transformPerspective: 900,
-    });
+    quickRef.current.x(px * 8);
+    quickRef.current.y(py * -8);
   };
 
   const onMouseLeave = () => {
-    gsap.to(cardRef.current, {
-      rotateX: 0,
-      rotateY: 0,
-      duration: 0.6,
-      ease: "power3.out",
-    });
+    quickRef.current?.x(0);
+    quickRef.current?.y(0);
   };
 
   return (
