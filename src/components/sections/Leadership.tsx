@@ -1,6 +1,15 @@
 import Reveal from "@/components/ui/Reveal";
+import ScrambleLink from "@/components/ui/ScrambleLink";
 
 const LEADERSHIP = [
+  {
+    role: "Aspire Leader",
+    org: "Aspire Leaders Program",
+    href: "https://www.aspireleaders.org/program/aspire-leaders-program/",
+    context: "Founded at Harvard",
+    detail:
+      "A nine-week leadership program with a curriculum designed and taught by Harvard faculty, selected from a global cohort spanning 195 countries.",
+  },
   {
     role: "Logistics Head",
     org: "SOFTEC",
@@ -28,17 +37,26 @@ export default function Leadership() {
           </h2>
         </Reveal>
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2">
+        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {LEADERSHIP.map((item, i) => (
             <Reveal key={item.role} delay={0.05 * i}>
-              <div className="rounded-2xl border border-border p-8">
+              <div className="flex h-full flex-col rounded-2xl border border-border p-8">
                 <span className="font-mono-label text-xs text-pink">
                   {item.context}
                 </span>
                 <h3 className="mt-4 text-xl font-medium text-foreground">
                   {item.role}
                 </h3>
-                <p className="text-sm text-cyan">{item.org}</p>
+                {item.href ? (
+                  <ScrambleLink
+                    href={item.href}
+                    className="inline-block w-fit text-sm text-cyan hover:text-violet"
+                  >
+                    {item.org}
+                  </ScrambleLink>
+                ) : (
+                  <p className="text-sm text-cyan">{item.org}</p>
+                )}
                 {item.detail ? (
                   <p className="mt-3 text-sm leading-relaxed text-muted">
                     {item.detail}
