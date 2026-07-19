@@ -56,7 +56,7 @@ export default function CustomCursor() {
   }, []);
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[999] hidden md:block" aria-hidden>
+    <div className="pointer-events-none fixed inset-0 z-[999]" aria-hidden>
       <div
         ref={ringRef}
         data-hover="false"
