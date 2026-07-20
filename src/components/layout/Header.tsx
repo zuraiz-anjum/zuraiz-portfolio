@@ -54,6 +54,13 @@ export default function Header() {
             </ScrambleLink>
           ))}
           <LiveClock className="font-mono-label text-xs text-muted" />
+          <Link
+            href="/book"
+            data-cursor="hover"
+            className="font-mono-label text-xs text-muted transition-colors hover:text-cyan"
+          >
+            View as Book
+          </Link>
           <a
             href="mailto:zuraizwork@gmail.com"
             data-cursor="hover"
@@ -102,6 +109,13 @@ export default function Header() {
             {link.label}
           </Link>
         ))}
+        <Link
+          href="/book"
+          onClick={() => setOpen(false)}
+          className="font-mono-label text-lg text-cyan"
+        >
+          View as Book
+        </Link>
         <a
           href="mailto:zuraizwork@gmail.com"
           onClick={() => setOpen(false)}

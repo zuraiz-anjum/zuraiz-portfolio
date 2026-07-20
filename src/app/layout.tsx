@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import SmoothScroll from "@/components/providers/SmoothScroll";
-import CustomCursor from "@/components/ui/CustomCursor";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,7 +16,7 @@ export const metadata: Metadata = {
   title: "Zuraiz Anjum — AI Engineer",
   description:
     "AI Engineer building production-grade LLM systems, autonomous agents, and full-stack AI platforms — from fine-tuning to deployment.",
-  metadataBase: new URL("https://zuraiz-anjum.vercel.app"),
+  metadataBase: new URL("https://zuraiz-portfolio.vercel.app"),
   openGraph: {
     title: "Zuraiz Anjum — AI Engineer",
     description:
@@ -40,12 +36,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">
-        <SmoothScroll>
-          <CustomCursor />
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-        </SmoothScroll>
+        {children}
       </body>
     </html>
   );
