@@ -28,14 +28,16 @@ const LEADERSHIP: LeadershipItem[] = [
     org: "SOFTEC",
     href: "https://softecnu.org/",
     context: "FAST-NUCES",
-    detail: "Large-scale student-run tech festival.",
+    detail:
+      "Ran venue logistics, vendor coordination, and on-the-ground execution for one of Pakistan's largest student-run tech festivals — thousands of attendees, dozens of moving parts, no room for error on event day.",
   },
   {
     role: "Head of Management",
     org: "NUCES Media Group",
     href: "https://www.instagram.com/nucesmediagroup/?hl=en",
     context: "FAST-NUCES",
-    detail: "",
+    detail:
+      "Managed the university's media wing — coordinating a team covering campus events, content strategy, and the photo/video output published across the group's social channels.",
   },
 ];
 
