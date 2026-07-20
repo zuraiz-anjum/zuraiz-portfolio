@@ -9,6 +9,7 @@ const GRADIENTS = [
   "from-violet/30 via-background to-cyan/20",
   "from-cyan/25 via-background to-pink/20",
   "from-pink/25 via-background to-violet/25",
+  "from-violet/20 via-background to-pink/15",
 ];
 
 export default function ProjectCard({

@@ -102,41 +102,63 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "applied-ml-research",
+    slug: "small-vs-large-llms",
     client: "Academic / Independent Research",
-    title: "Crisis Detection Benchmarking & ML Fitness Tracker",
-    category: "Applied ML Research",
+    title: "Small vs. Large LLMs: A Crisis Detection Benchmark",
+    category: "NLP Research",
     year: "2025",
     summary:
-      "Two applied-ML studies: benchmarking how far small language models can close the gap with large ones on crisis detection, and a from-scratch exercise-recognition and rep-counting system from raw sensor data.",
-    cover: "/projects/applied-ml-research/cover.jpg",
-    stack: [
-      "NLP",
-      "DistilBERT",
-      "MentalBERT",
-      "Flan-T5",
-      "TF-IDF",
-      "Scikit-learn",
-    ],
+      "A benchmark asking how much model you actually need: how closely small, cheap language models can approximate large-scale performance on a sensitive, high-stakes classification task.",
+    cover: "/projects/small-vs-large-llms/cover.jpg",
+    stack: ["NLP", "DistilBERT", "MentalBERT", "Flan-T5", "TF-IDF", "Scikit-learn"],
     role: "Sole researcher — data, modeling, evaluation",
     overview:
-      "Two independent studies asking the same underlying question from different angles: how much model do you actually need? One benchmarks small transformer models against a classical baseline on a sensitive, high-stakes classification task. The other builds a full exercise-recognition pipeline from raw accelerometer and gyroscope data.",
+      "Crisis detection on social media is a task where false negatives are dangerous and false positives erode trust. This study benchmarks small transformer models against a classical baseline to find out exactly how much performance you give up by going small — and whether it's worth it.",
     challenge:
-      "For crisis detection, false negatives are dangerous and false positives erode trust — the question was whether smaller, cheaper models could approximate large-model performance closely enough to be viable. For the fitness tracker, raw motion sensor data has no labels and no easy signal boundaries — reps had to be counted, not just classified.",
+      "Large general-purpose models perform well on crisis detection but are expensive to run at scale. The open question was whether smaller, domain-specific models could close enough of the gap to be a viable, cheaper alternative in production.",
     approach: [
       "Benchmarked DistilBERT, MentalBERT, and Flan-T5 against a TF-IDF + Logistic Regression baseline on social-media crisis-detection data.",
-      "Analyzed precision/recall tradeoffs to quantify exactly how much performance small models were leaving on the table versus large-scale approaches.",
-      "Engineered features from raw accelerometer/gyroscope signals and trained SVM, Random Forest, and Neural Network classifiers for exercise recognition.",
-      "Designed a custom rep-counting algorithm on top of the classifier output — turning a stream of motion into a discrete, trustworthy count.",
+      "Analyzed precision/recall tradeoffs across all four approaches to quantify exactly how much performance small models were leaving on the table.",
+      "Evaluated where domain-specific pretraining (MentalBERT) closed the gap versus general-purpose small models (DistilBERT).",
     ],
     result: [
       "Quantified the real performance gap between lightweight domain-specific models and large general-purpose ones on a safety-critical task.",
-      "Built a working exercise-recognition and rep-counting pipeline entirely from raw, unlabeled sensor data.",
+      "Produced a concrete answer to \"how much model do you need\" for teams weighing cost against accuracy on sensitive classification tasks.",
     ],
     metrics: [
       { label: "Models benchmarked", value: "4" },
+      { label: "Task", value: "Crisis detection" },
+      { label: "Baseline", value: "TF-IDF + LogReg" },
+    ],
+  },
+  {
+    slug: "ml-fitness-tracker",
+    client: "Academic / Independent Research",
+    title: "ML Fitness Tracker",
+    category: "Applied ML",
+    year: "2025",
+    summary:
+      "A from-scratch exercise-recognition and rep-counting system built entirely from raw, unlabeled accelerometer and gyroscope data.",
+    cover: "/projects/ml-fitness-tracker/cover.jpg",
+    stack: ["Python", "Scikit-learn", "SVM", "Random Forest", "Signal Processing"],
+    role: "Sole engineer — data pipeline, modeling, algorithm design",
+    overview:
+      "Raw motion sensor data has no labels and no easy signal boundaries — it's just a continuous stream of numbers. This project turns that stream into something useful: recognizing which exercise is being performed and counting reps accurately, without any manual annotation of the raw signal.",
+    challenge:
+      "Accelerometer and gyroscope data is noisy and continuous, with no obvious boundaries between reps or exercises. The system had to both classify the exercise and segment the signal into discrete, countable repetitions.",
+    approach: [
+      "Engineered features from raw accelerometer/gyroscope signals — no pre-built activity-recognition library.",
+      "Trained and compared SVM, Random Forest, and Neural Network classifiers for exercise recognition.",
+      "Designed a custom rep-counting algorithm on top of the classifier output, turning a continuous motion stream into a discrete, trustworthy count.",
+    ],
+    result: [
+      "Built a working exercise-recognition and rep-counting pipeline entirely from raw, unlabeled sensor data.",
+      "Validated which classifier generalized best across exercise types before committing to a final model.",
+    ],
+    metrics: [
       { label: "Classifiers trained", value: "3" },
       { label: "Data source", value: "Raw sensor streams" },
+      { label: "Output", value: "Live rep count" },
     ],
   },
 ];

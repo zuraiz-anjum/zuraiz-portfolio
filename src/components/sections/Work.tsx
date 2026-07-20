@@ -3,6 +3,8 @@ import ProjectCard from "@/components/ui/ProjectCard";
 import { projects } from "@/lib/projects";
 
 export default function Work() {
+  const [flagship, ...rest] = projects;
+
   return (
     <section id="work" className="px-6 py-28 md:px-10 md:py-40">
       <div className="mx-auto max-w-6xl">
@@ -15,7 +17,7 @@ export default function Work() {
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="mt-6 max-w-xl text-3xl font-medium leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl">
-                Three systems. Built to survive real users.
+                Four systems. Built to survive real users.
               </h2>
             </Reveal>
           </div>
@@ -27,17 +29,18 @@ export default function Work() {
           </Reveal>
         </div>
 
-        <div className="mt-16 grid gap-6 md:grid-cols-2">
-          {projects.map((project, i) => (
-            <div
-              key={project.slug}
-              className={i === 0 ? "md:col-span-2" : undefined}
-            >
-              <Reveal delay={0.05 * i}>
-                <ProjectCard project={project} index={i} />
+        <div className="mt-16 flex flex-col gap-6">
+          <Reveal>
+            <ProjectCard project={flagship} index={0} />
+          </Reveal>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {rest.map((project, i) => (
+              <Reveal key={project.slug} delay={0.05 * (i + 1)}>
+                <ProjectCard project={project} index={i + 1} />
               </Reveal>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
