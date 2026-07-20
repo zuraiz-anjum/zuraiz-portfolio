@@ -24,7 +24,7 @@ export const projects: Project[] = [
     category: "Multi-Agent LLM System",
     year: "2026",
     summary:
-      "A 20-agent LangGraph research assistant that turns a natural-language query into a structured research report, complete with citations, comparison matrices, and visualizations.",
+      "A 26-agent LangGraph research assistant running 14 coordinated workflows, turning a natural-language query into a structured research report, complete with citations, comparison matrices, and visualizations.",
     cover: "/projects/ares/cover.jpg",
     stack: [
       "Python",
@@ -38,16 +38,16 @@ export const projects: Project[] = [
     liveUrl: "https://web-production-41acc.up.railway.app",
     role: "Sole engineer — architecture, agent design, evals, deployment",
     overview:
-      "ARES is what happens when you stop trusting a single LLM call to do research and instead build a system of specialists that check each other's work. Ask it a question and twenty coordinated agents go plan, retrieve, write, critique, and revise until the output survives its own fact-check.",
+      "ARES is what happens when you stop trusting a single LLM call to do research and instead build a system of specialists that check each other's work. Ask it a question and twenty-six coordinated agents, spread across fourteen workflows, go plan, retrieve, write, critique, and revise until the output survives its own fact-check.",
     challenge:
       "Generic LLM answers to research questions are fast, fluent, and frequently wrong — ungrounded claims, no citations, no way to verify anything. The goal was a system that produces reports a researcher could actually cite, with the reasoning and evidence trail to back it up.",
     approach: [
-      "Designed a 20-agent LangGraph pipeline with distinct planning, retrieval, writing, and critic roles instead of one monolithic prompt.",
+      "Designed a 26-agent LangGraph pipeline across 14 workflows, with distinct planning, retrieval, writing, and critic roles instead of one monolithic prompt.",
       "Built multi-file RAG over PDF/DOCX/TXT sources using ChromaDB with FlashRank reranking, plus persistent entity memory across a session.",
       "Wired in real-time web research through the Tavily API so the system isn't limited to whatever was in a static corpus.",
       "Implemented multi-provider LLM fallback across Groq, Cerebras, Gemini, and OpenRouter with automatic failover and live cost/budget tracking.",
       "Added a self-recalibrating confidence score and a critic-agent revision loop that rejects and rewrites output failing groundedness checks.",
-      "Wrote 122 automated tests — unit, integration, and groundedness/citation checks — before calling any of it production-ready.",
+      "Wrote 123 automated tests — unit, integration, and groundedness/citation checks — before calling any of it production-ready.",
     ],
     result: [
       "Shipped as a Dockerized REST + SSE-streaming API on Railway, with Slack/email integrations and LangSmith tracing for observability.",
@@ -55,8 +55,9 @@ export const projects: Project[] = [
       "Runs across four LLM providers with automatic failover — a single provider outage doesn't take the system down.",
     ],
     metrics: [
-      { label: "Agents in pipeline", value: "20" },
-      { label: "Automated tests", value: "122" },
+      { label: "Agents in pipeline", value: "26" },
+      { label: "Workflows", value: "14" },
+      { label: "Automated tests", value: "123" },
       { label: "LLM providers with failover", value: "4" },
     ],
   },

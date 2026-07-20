@@ -10,8 +10,8 @@ const HeroCanvas = dynamic(() => import("@/components/three/HeroCanvas"), {
 });
 
 const STATS = [
-  { value: "20", label: "Agents in one pipeline" },
-  { value: "122", label: "Automated tests shipped" },
+  { value: "26", label: "Agents in one pipeline" },
+  { value: "123", label: "Automated tests shipped" },
   { value: "4", label: "LLM providers, zero downtime" },
 ];
 
