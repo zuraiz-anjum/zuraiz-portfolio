@@ -10,6 +10,7 @@ type LeadershipItem = {
   period?: string;
   detail: string;
   proof?: string;
+  timeline?: { role: string; period: string }[];
 };
 
 const LEADERSHIP: LeadershipItem[] = [
@@ -24,12 +25,18 @@ const LEADERSHIP: LeadershipItem[] = [
     proof: "/proof/aspire-leaders-program.png",
   },
   {
-    role: "Logistics Head",
+    role: "Event Coordinator",
     org: "SOFTEC",
     href: "https://softecnu.org/",
-    context: "FAST-NUCES",
+    context: "FAST-NUCES · Executive Committee",
+    period: "Jul 2026 — Present",
     detail:
-      "Ran venue logistics, vendor coordination, and on-the-ground execution for one of Pakistan's largest student-run tech festivals — thousands of attendees, dozens of moving parts, no room for error on event day.",
+      "Sits on SOFTEC's executive committee (EXE) with authority over the festival's execution end to end — effectively the acting president during SOFTEC, owning decisions that used to route through logistics.",
+    timeline: [
+      { role: "Deputy Decor & Logistics", period: "Aug 2024 — Jul 2025" },
+      { role: "Head of Logistics", period: "Aug 2025 — Jun 2026" },
+      { role: "Event Coordinator", period: "Jul 2026 — Present" },
+    ],
   },
   {
     role: "Head of Management",
@@ -83,6 +90,34 @@ export default function Leadership() {
                   <p className="mt-3 text-sm leading-relaxed text-muted">
                     {item.detail}
                   </p>
+                ) : null}
+                {item.timeline ? (
+                  <ol className="mt-5 flex flex-col gap-2 border-l border-border pl-4">
+                    {item.timeline.map((step, idx) => {
+                      const isCurrent = idx === item.timeline!.length - 1;
+                      return (
+                        <li key={step.role} className="relative">
+                          <span
+                            className={`absolute -left-[1.32rem] top-1.5 h-1.5 w-1.5 rounded-full ${
+                              isCurrent ? "bg-violet" : "bg-border"
+                            }`}
+                          />
+                          <p
+                            className={`text-xs ${
+                              isCurrent
+                                ? "font-medium text-foreground"
+                                : "text-muted"
+                            }`}
+                          >
+                            {step.role}
+                          </p>
+                          <p className="font-mono-label text-[0.55rem] text-muted">
+                            {step.period}
+                          </p>
+                        </li>
+                      );
+                    })}
+                  </ol>
                 ) : null}
                 <ProofLink href={item.proof} />
               </div>
