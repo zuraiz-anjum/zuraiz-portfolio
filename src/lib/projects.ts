@@ -109,6 +109,7 @@ export const projects: Project[] = [
     year: "2025",
     summary:
       "A benchmark asking how much model you actually need: how closely small, cheap language models can approximate large-scale performance on a sensitive, high-stakes classification task.",
+    cover: "/projects/small-vs-large-llms/cover.png",
     stack: ["NLP", "DistilBERT", "MentalBERT", "Flan-T5", "TF-IDF", "Scikit-learn"],
     role: "Sole researcher — data, modeling, evaluation",
     overview:
