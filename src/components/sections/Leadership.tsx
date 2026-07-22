@@ -39,12 +39,18 @@ const LEADERSHIP: LeadershipItem[] = [
     ],
   },
   {
-    role: "Head of Management",
+    role: "SVP (Senior Vice President)",
     org: "NUCES Media Group",
     href: "https://www.instagram.com/nucesmediagroup/?hl=en",
     context: "FAST-NUCES",
+    period: "Jul 2026 — Present",
     detail:
-      "Managed the university's media wing — coordinating a team covering campus events, content strategy, and the photo/video output published across the group's social channels.",
+      "Manages the university's media wing — coordinating a team covering campus events, content strategy, and the photo/video output published across the group's social channels.",
+    timeline: [
+      { role: "Logistic Deputy", period: "Aug 2024 — Jun 2025" },
+      { role: "Head of Management", period: "Jul 2025 — Jun 2026" },
+      { role: "SVP (Senior Vice President)", period: "Jul 2026 — Present" },
+    ],
   },
 ];
 
