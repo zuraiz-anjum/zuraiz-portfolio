@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import Link from "next/link";
 import { registerGsap, SplitText } from "@/lib/gsap";
 import LiveClock from "@/components/layout/LiveClock";
@@ -57,10 +58,26 @@ function HeroShowcase() {
           visible ? "opacity-100" : "opacity-0"
         }`}
       >
-        <div
-          className={`absolute inset-0 bg-gradient-to-br ${projectGradient(index)}`}
-        />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.12),transparent_60%)]" />
+        {project.cover ? (
+          <>
+            <Image
+              src={project.cover}
+              alt={project.title}
+              fill
+              sizes="416px"
+              className="object-cover"
+              priority={index === 0}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+          </>
+        ) : (
+          <>
+            <div
+              className={`absolute inset-0 bg-gradient-to-br ${projectGradient(index)}`}
+            />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.12),transparent_60%)]" />
+          </>
+        )}
         <span className="font-mono-label absolute left-5 top-5 text-xs text-muted">
           Recent work
         </span>
