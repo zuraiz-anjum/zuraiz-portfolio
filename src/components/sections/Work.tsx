@@ -35,7 +35,11 @@ export default function Work() {
 
         <div className="mt-16 flex flex-col gap-6">
           <Reveal>
-            <ProjectCard project={flagship} index={0} />
+            <ProjectCard
+              project={flagship}
+              index={0}
+              sizes="(min-width: 1024px) 1152px, 100vw"
+            />
           </Reveal>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

@@ -10,9 +10,11 @@ import { projectGradient } from "@/lib/theme";
 export default function ProjectCard({
   project,
   index,
+  sizes = "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw",
 }: {
   project: Project;
   index: number;
+  sizes?: string;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const quickRef = useRef<{
@@ -64,7 +66,7 @@ export default function ProjectCard({
               src={project.cover}
               alt={project.title}
               fill
-              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+              sizes={sizes}
               className="object-cover transition-transform duration-700 group-hover:scale-105"
               priority={index === 0}
             />
