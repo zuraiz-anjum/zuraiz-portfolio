@@ -6,6 +6,7 @@ import Experience from "@/components/sections/Experience";
 import Leadership from "@/components/sections/Leadership";
 import Process from "@/components/sections/Process";
 import Contact from "@/components/sections/Contact";
+import SectionDivider from "@/components/ui/SectionDivider";
 
 export default function Home() {
   return (
@@ -13,10 +14,15 @@ export default function Home() {
       <Hero />
       <Skills />
       <About />
-      <Work />
+      <SectionDivider />
       <Experience />
+      <SectionDivider />
+      <Work />
+      <SectionDivider />
       <Leadership />
+      <SectionDivider />
       <Process />
+      <SectionDivider />
       <Contact />
     </>
   );

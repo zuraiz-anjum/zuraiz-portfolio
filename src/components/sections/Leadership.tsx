@@ -50,13 +50,13 @@ const LEADERSHIP: LeadershipItem[] = [
 
 export default function Leadership() {
   return (
-    <section id="leadership" className="px-6 py-28 md:px-10 md:py-40">
+    <section id="leadership" className="px-6 py-20 md:px-10 md:py-28">
       <div className="mx-auto max-w-6xl">
         <Reveal>
           <span className="font-mono-label text-xs text-muted">Leadership</span>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-6 max-w-2xl text-3xl font-medium leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl">
+          <h2 className="mt-6 max-w-2xl text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl">
             Outside the codebase.
           </h2>
         </Reveal>
@@ -64,11 +64,11 @@ export default function Leadership() {
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {LEADERSHIP.map((item, i) => (
             <Reveal key={item.role} delay={0.05 * i}>
-              <div className="flex h-full flex-col rounded-2xl border border-border p-8">
+              <div className="group flex h-full flex-col rounded-2xl border border-border bg-background-raised/40 p-8 backdrop-blur-sm transition-all duration-300 hover:border-violet/40 hover:bg-background-raised/80 hover:shadow-[0_0_40px_-15px_rgba(167,139,250,0.35)]">
                 <span className="font-mono-label text-xs text-pink">
                   {item.context}
                 </span>
-                <h3 className="mt-4 text-xl font-medium text-foreground">
+                <h3 className="mt-4 text-xl font-bold text-foreground transition-colors duration-300 group-hover:text-violet">
                   {item.role}
                 </h3>
                 {item.href ? (

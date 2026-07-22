@@ -17,18 +17,24 @@ export default function Footer() {
             <span className="font-mono-label text-xs text-muted">Connect</span>
             <ScrambleLink
               href="mailto:zuraizwork@gmail.com"
+              data-cursor="hover"
+              data-cursor-label="Email"
               className="text-sm text-foreground hover:text-violet"
             >
               zuraizwork@gmail.com
             </ScrambleLink>
             <ScrambleLink
               href="https://github.com/zuraiz-anjum"
+              data-cursor="hover"
+              data-cursor-label="Visit"
               className="text-sm text-foreground hover:text-violet"
             >
               github.com/zuraiz-anjum
             </ScrambleLink>
             <ScrambleLink
               href="https://www.linkedin.com/in/zuraiz-anjum/"
+              data-cursor="hover"
+              data-cursor-label="Visit"
               className="text-sm text-foreground hover:text-violet"
             >
               linkedin.com/in/zuraiz-anjum

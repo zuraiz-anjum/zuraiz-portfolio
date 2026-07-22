@@ -21,11 +21,15 @@ const FOCUS_AREAS = [
 
 export default function About() {
   return (
-    <section id="about" className="px-6 py-28 md:px-10 md:py-40">
-      <div className="mx-auto max-w-6xl">
+    <section id="about" className="relative overflow-hidden px-6 py-20 md:px-10 md:py-28">
+      <div
+        className="ambient-glow ambient-glow-pink top-1/2 -translate-y-1/2"
+        aria-hidden
+      />
+      <div className="relative z-10 mx-auto max-w-6xl">
         <div className="grid gap-10 md:grid-cols-[240px_1fr] md:gap-16">
           <Reveal>
-            <div className="relative aspect-square w-full max-w-[240px] overflow-hidden rounded-2xl border border-border">
+            <div className="relative aspect-square w-full max-w-[240px] overflow-hidden rounded-2xl border-2 border-violet/40 shadow-[0_0_60px_-20px_rgba(167,139,250,0.55)]">
               <Image
                 src="/about-photo.jpg"
                 alt="Zuraiz Anjum"
@@ -43,7 +47,7 @@ export default function About() {
             </Reveal>
 
             <Reveal delay={0.05}>
-              <h2 className="mt-6 max-w-3xl text-3xl font-medium leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl">
+              <h2 className="mt-6 max-w-3xl text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl">
                 I don&apos;t trust a model until I&apos;ve watched it fail —
                 then I build the system that catches it.
               </h2>
@@ -65,11 +69,15 @@ export default function About() {
 
         <div className="mt-20 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-3">
           {FOCUS_AREAS.map((area, i) => (
-            <Reveal key={area.title} delay={0.05 * i} className="bg-background p-8">
+            <Reveal
+              key={area.title}
+              delay={0.05 * i}
+              className="group bg-background/70 p-8 backdrop-blur-sm transition-colors duration-300 hover:bg-background-raised/90"
+            >
               <span className="font-mono-label text-xs text-cyan">
                 0{i + 1}
               </span>
-              <h3 className="mt-4 text-lg font-medium text-foreground">
+              <h3 className="mt-4 text-lg font-semibold text-foreground transition-colors duration-300 group-hover:text-violet">
                 {area.title}
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-muted">

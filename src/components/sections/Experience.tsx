@@ -46,7 +46,7 @@ const ROLES: Role[] = [
       "Designed and optimized database schemas, APIs, and backend services for AI model integration into ML applications on a global engineering team. Ran model evaluation on accuracy, performance, and reliability, using coding agents to speed up code generation and testing.",
   },
   {
-    period: "Jan 2026 — Mar 2026",
+    period: "Jun 5 — Aug 5, 2025",
     role: "AI/ML Intern",
     org: "Project19",
     href: "https://theproject19.com",
@@ -59,7 +59,7 @@ const ROLES: Role[] = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="px-6 py-28 md:px-10 md:py-40">
+    <section id="experience" className="px-6 py-20 md:px-10 md:py-28">
       <div className="mx-auto max-w-6xl">
         <Reveal>
           <span className="font-mono-label text-xs text-muted">Experience</span>
@@ -73,11 +73,13 @@ export default function Experience() {
                   <p className="font-mono-label text-xs text-muted">
                     {item.period}
                   </p>
-                  <p className="mt-2 text-lg font-medium text-foreground md:text-xl">
+                  <p className="mt-2 text-xl font-bold text-foreground md:text-2xl">
                     {item.role}
                   </p>
                   <ScrambleLink
                     href={item.href}
+                    data-cursor="hover"
+                    data-cursor-label="Visit"
                     className="inline-block text-sm text-cyan hover:text-violet"
                   >
                     {item.org}

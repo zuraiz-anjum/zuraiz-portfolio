@@ -11,12 +11,13 @@ export default function ScrambleLink({
   children,
   className,
   onClick,
+  ...rest
 }: {
   href: string;
   children: string;
   className?: string;
   onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
-}) {
+} & Omit<React.ComponentPropsWithoutRef<"a">, "href" | "className" | "onClick" | "children">) {
   const ref = useRef<HTMLSpanElement>(null);
 
   const onEnter = () => {
@@ -30,7 +31,7 @@ export default function ScrambleLink({
   };
 
   return (
-    <Link href={href} className={className} onMouseEnter={onEnter} onClick={onClick}>
+    <Link href={href} className={className} onMouseEnter={onEnter} onClick={onClick} {...rest}>
       <span ref={ref}>{children}</span>
     </Link>
   );

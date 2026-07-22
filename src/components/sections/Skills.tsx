@@ -31,17 +31,16 @@ function MarqueeRow({ items, reverse = false }: { items: string[]; reverse?: boo
   return (
     <div className="flex overflow-hidden">
       <div
-        className={`flex shrink-0 gap-10 pr-10 ${
+        className={`flex shrink-0 gap-4 pr-4 ${
           reverse ? "marquee-track-reverse" : "marquee-track"
         }`}
       >
         {doubled.map((item, i) => (
           <span
             key={`${item}-${i}`}
-            className="font-mono-label whitespace-nowrap text-sm text-muted transition-colors hover:text-foreground md:text-base"
+            className="font-mono-label whitespace-nowrap rounded-full border border-border px-5 py-2.5 text-sm font-semibold text-muted transition-colors hover:border-violet hover:text-foreground md:text-base"
           >
             {item}
-            <span className="ml-10 text-border">/</span>
           </span>
         ))}
       </div>

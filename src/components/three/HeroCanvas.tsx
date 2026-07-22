@@ -31,6 +31,7 @@ export default function HeroCanvas() {
       uResolution: { value: new THREE.Vector2(1, 1) },
       uMouse: { value: new THREE.Vector2(0.5, 0.5) },
       uIntensity: { value: 1 },
+      uScroll: { value: 0 },
     };
 
     const material = new THREE.ShaderMaterial({
@@ -61,6 +62,12 @@ export default function HeroCanvas() {
     };
     window.addEventListener("mousemove", onMouseMove);
 
+    let targetScroll = 0;
+    const onScroll = () => {
+      targetScroll = Math.min(1, Math.max(0, window.scrollY / window.innerHeight));
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(container);
 
@@ -72,6 +79,7 @@ export default function HeroCanvas() {
       const delta = clock.getDelta();
       uniforms.uTime.value += prefersReducedMotion ? delta * 0.15 : delta;
       uniforms.uMouse.value.lerp(targetMouse, 0.04);
+      uniforms.uScroll.value += (targetScroll - uniforms.uScroll.value) * 0.06;
       renderer.render(scene, camera);
     };
     animate();
@@ -88,6 +96,7 @@ export default function HeroCanvas() {
     return () => {
       cancelAnimationFrame(rafId);
       window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("scroll", onScroll);
       document.removeEventListener("visibilitychange", onVisibility);
       resizeObserver.disconnect();
       geometry.dispose();

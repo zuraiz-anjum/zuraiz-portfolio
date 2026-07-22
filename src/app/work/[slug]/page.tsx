@@ -179,7 +179,7 @@ export default async function CaseStudyPage({
               ))}
             </ul>
 
-            <div className="mt-10 grid grid-cols-2 gap-6 border-t border-border pt-8 sm:grid-cols-4">
+            <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-border pt-8">
               {project.metrics.map((metric, i) => (
                 <Reveal key={metric.label} delay={0.03 * i}>
                   <p className="text-2xl font-medium text-foreground md:text-3xl">

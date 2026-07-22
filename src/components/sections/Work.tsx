@@ -6,8 +6,12 @@ export default function Work() {
   const [flagship, ...rest] = projects;
 
   return (
-    <section id="work" className="px-6 py-28 md:px-10 md:py-40">
-      <div className="mx-auto max-w-6xl">
+    <section id="work" className="relative overflow-hidden px-6 py-20 md:px-10 md:py-28">
+      <div
+        className="ambient-glow ambient-glow-pink top-1/2 -translate-y-1/2"
+        aria-hidden
+      />
+      <div className="relative z-10 mx-auto max-w-6xl">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
             <Reveal>
@@ -16,7 +20,7 @@ export default function Work() {
               </span>
             </Reveal>
             <Reveal delay={0.05}>
-              <h2 className="mt-6 max-w-xl text-3xl font-medium leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl">
+              <h2 className="mt-6 max-w-xl text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl">
                 Four systems. Built to survive real users.
               </h2>
             </Reveal>

@@ -11,12 +11,14 @@ const HOVERABLE_SELECTOR = "a, button, [data-cursor='hover']";
 // visible cursor at all.
 export default function CustomCursor() {
   const ringRef = useRef<HTMLDivElement>(null);
+  const labelRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     if (window.matchMedia("(hover: none)").matches) return;
 
     const ring = ringRef.current;
-    if (!ring) return;
+    const label = labelRef.current;
+    if (!ring || !label) return;
 
     gsap.set(ring, { xPercent: -50, yPercent: -50, autoAlpha: 0 });
 
@@ -35,14 +37,21 @@ export default function CustomCursor() {
     window.addEventListener("mousemove", onMove, { passive: true });
 
     const onOver = (e: MouseEvent) => {
-      if ((e.target as Element)?.closest?.(HOVERABLE_SELECTOR)) {
+      const hoverTarget = (e.target as Element)?.closest?.(HOVERABLE_SELECTOR);
+      if (hoverTarget) {
         ring.setAttribute("data-hover", "true");
+        const labelText = hoverTarget.getAttribute("data-cursor-label");
+        if (labelText) {
+          label.textContent = labelText;
+          gsap.to(label, { autoAlpha: 1, duration: 0.25 });
+        }
       }
     };
     const onOut = (e: MouseEvent) => {
       const related = e.relatedTarget as Element | null;
       if (!related?.closest?.(HOVERABLE_SELECTOR)) {
         ring.setAttribute("data-hover", "false");
+        gsap.to(label, { autoAlpha: 0, duration: 0.15 });
       }
     };
     window.addEventListener("mouseover", onOver, { passive: true });
@@ -64,8 +73,13 @@ export default function CustomCursor() {
       <div
         ref={ringRef}
         data-hover="false"
-        className="fixed left-0 top-0 h-8 w-8 rounded-full border border-violet/50 transition-[width,height] duration-200 data-[hover=true]:h-12 data-[hover=true]:w-12 data-[hover=true]:border-violet"
-      />
+        className="fixed left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full border border-violet/50 transition-[width,height] duration-200 data-[hover=true]:h-12 data-[hover=true]:w-12 data-[hover=true]:border-violet"
+      >
+        <span
+          ref={labelRef}
+          className="font-mono-label pointer-events-none whitespace-nowrap text-[0.6rem] tracking-wide text-foreground opacity-0"
+        />
+      </div>
     </div>
   );
 }

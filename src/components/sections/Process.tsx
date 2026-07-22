@@ -1,8 +1,15 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
 import { gsap, registerGsap, ScrollTrigger } from "@/lib/gsap";
 import Reveal from "@/components/ui/Reveal";
+import type { ParticleSphereHandle } from "@/components/three/ParticleSphere";
+
+const ParticleSphere = dynamic(
+  () => import("@/components/three/ParticleSphere"),
+  { ssr: false }
+);
 
 const STEPS = [
   {
@@ -47,6 +54,7 @@ function wrapWords(el: HTMLElement) {
 
 export default function Process() {
   const stageRef = useRef<HTMLDivElement>(null);
+  const sphereRef = useRef<ParticleSphereHandle>(null);
 
   useEffect(() => {
     registerGsap();
@@ -115,7 +123,10 @@ export default function Process() {
         end: "+=350%",
         pin: true,
         scrub: 0.4,
-        onUpdate: (self) => tl.progress(self.progress),
+        onUpdate: (self) => {
+          tl.progress(self.progress);
+          sphereRef.current?.setProgress(self.progress);
+        },
       });
 
       return () => {
@@ -128,53 +139,68 @@ export default function Process() {
   }, []);
 
   return (
-    <section id="process" className="relative">
+    <section id="process" className="relative overflow-hidden">
+      {/* Mobile-only ambient glow; desktop pinned stage has its own below */}
+      <div
+        className="ambient-glow ambient-glow-pink top-0 md:hidden"
+        aria-hidden
+      />
+
       {/* Desktop: heading + pinned scroll-linked narrative share one viewport */}
       <div
         ref={stageRef}
         className="relative hidden h-screen flex-col justify-center overflow-hidden px-6 md:flex md:px-10"
       >
-        <div className="mb-14">
+        <div
+          className="ambient-glow ambient-glow-pink top-1/2 -translate-y-1/2"
+          aria-hidden
+        />
+
+        <div className="pointer-events-none absolute right-0 top-1/2 z-10 hidden h-[26rem] w-[26rem] -translate-y-1/2 opacity-80 lg:right-10 lg:block xl:h-[34rem] xl:w-[34rem]">
+          <ParticleSphere ref={sphereRef} />
+        </div>
+
+        <div className="relative z-10 mb-14">
           <Reveal>
             <span className="font-mono-label text-xs text-muted">How I work</span>
           </Reveal>
           <Reveal delay={0.05}>
-            <h2 className="mt-4 max-w-2xl text-2xl font-medium leading-tight tracking-tight text-foreground md:text-3xl lg:text-4xl">
+            <h2 className="mt-4 max-w-2xl text-3xl font-bold leading-tight tracking-tight text-foreground md:text-4xl lg:text-5xl">
               Five steps between an idea and something that survives production.
             </h2>
           </Reveal>
         </div>
 
-        <div className="grid w-full grid-cols-[auto_1fr] items-center gap-16">
-          <div className="relative h-24 w-40">
+        <div className="relative z-10 grid w-full grid-cols-[auto_1fr] items-center gap-16">
+          <div className="relative h-28 w-48">
             {STEPS.map((step) => (
               <span
                 key={step.number}
                 data-step-number
-                className="absolute inset-0 font-mono text-7xl text-violet/40"
+                className="absolute inset-0 font-mono text-8xl text-violet/40"
               >
                 {step.number}
               </span>
             ))}
           </div>
           <div>
-            <div className="relative h-[8.5rem]">
+            <div className="relative h-32 lg:h-36 xl:h-44">
               {STEPS.map((step) => (
                 <h3
                   key={step.title}
                   data-step-title
-                  className="absolute left-0 top-0 text-5xl font-medium tracking-tight text-foreground lg:text-6xl"
+                  className="absolute left-0 top-0 text-6xl font-bold tracking-tight text-foreground lg:text-7xl xl:text-8xl"
                 >
                   {step.title}
                 </h3>
               ))}
             </div>
-            <div className="relative mt-6 h-16 max-w-xl">
+            <div className="relative mt-6 h-20 max-w-xl">
               {STEPS.map((step) => (
                 <p
                   key={step.detail}
                   data-step-detail
-                  className="absolute left-0 top-0 text-base leading-relaxed text-muted"
+                  className="absolute left-0 top-0 text-lg leading-relaxed text-muted"
                 >
                   {step.detail}
                 </p>
@@ -185,23 +211,23 @@ export default function Process() {
       </div>
 
       {/* Mobile: static stacked list */}
-      <div className="px-6 pt-28 md:hidden">
+      <div className="relative z-10 px-6 pt-28 md:hidden">
         <Reveal>
           <span className="font-mono-label text-xs text-muted">How I work</span>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mt-6 max-w-2xl text-3xl font-medium leading-tight tracking-tight text-foreground">
+          <h2 className="mt-6 max-w-2xl text-4xl font-bold leading-tight tracking-tight text-foreground">
             Five steps between an idea and something that survives production.
           </h2>
         </Reveal>
       </div>
-      <div className="mt-16 flex flex-col divide-y divide-border border-t border-border px-6 md:hidden">
+      <div className="relative z-10 mt-16 flex flex-col divide-y divide-border border-t border-border px-6 md:hidden">
         {STEPS.map((step) => (
           <Reveal key={step.number} className="py-8">
             <span className="font-mono text-3xl text-violet/60">
               {step.number}
             </span>
-            <h3 className="mt-3 text-2xl font-medium text-foreground">
+            <h3 className="mt-3 text-3xl font-bold text-foreground">
               {step.title}
             </h3>
             <p className="mt-3 max-w-md text-sm leading-relaxed text-muted">

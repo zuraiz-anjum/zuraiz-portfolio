@@ -4,8 +4,10 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ScrambleLink from "@/components/ui/ScrambleLink";
+import Magnetic from "@/components/ui/Magnetic";
 import LiveClock from "./LiveClock";
 import { getLenis } from "@/lib/lenisStore";
+import { COMMAND_PALETTE_TOGGLE_EVENT } from "@/components/ui/CommandPalette";
 
 const HEADER_OFFSET = -88;
 
@@ -53,14 +55,44 @@ export default function Header() {
               {link.label}
             </ScrambleLink>
           ))}
+          <Magnetic strength={0.4}>
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="hover"
+              data-cursor-label="View"
+              className="group flex items-center gap-1.5 rounded-full border border-border px-4 py-2 font-mono-label text-xs text-foreground transition-all duration-300 hover:border-violet hover:text-violet hover:shadow-[0_0_24px_-8px_rgba(167,139,250,0.7)]"
+            >
+              Resume
+              <span
+                aria-hidden
+                className="inline-block transition-transform duration-300 ease-out group-hover:translate-x-0.5"
+              >
+                →
+              </span>
+            </a>
+          </Magnetic>
           <LiveClock className="font-mono-label text-xs text-muted" />
-          <a
-            href="mailto:zuraizwork@gmail.com"
+          <button
+            type="button"
             data-cursor="hover"
-            className="rounded-full border border-border px-4 py-2 font-mono-label text-xs text-foreground transition-colors hover:border-violet hover:text-violet"
+            data-cursor-label="Search"
+            onClick={() => window.dispatchEvent(new CustomEvent(COMMAND_PALETTE_TOGGLE_EVENT))}
+            className="flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 font-mono-label text-[0.65rem] text-muted transition-colors hover:border-violet hover:text-foreground"
           >
-            Say Hello
-          </a>
+            <span aria-hidden>⌘K</span>
+          </button>
+          <Magnetic strength={0.5}>
+            <a
+              href="mailto:zuraizwork@gmail.com"
+              data-cursor="hover"
+              data-cursor-label="Email"
+              className="rounded-full border border-border px-4 py-2 font-mono-label text-xs text-foreground transition-colors hover:border-violet hover:text-violet"
+            >
+              Say Hello
+            </a>
+          </Magnetic>
         </nav>
 
         <button
@@ -102,6 +134,15 @@ export default function Header() {
             {link.label}
           </Link>
         ))}
+        <a
+          href="/resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => setOpen(false)}
+          className="flex items-center gap-2 font-mono-label text-lg text-foreground"
+        >
+          Resume <span aria-hidden>→</span>
+        </a>
         <a
           href="mailto:zuraizwork@gmail.com"
           onClick={() => setOpen(false)}

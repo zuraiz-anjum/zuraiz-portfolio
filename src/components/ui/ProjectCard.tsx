@@ -4,13 +4,7 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { gsap } from "@/lib/gsap";
 import type { Project } from "@/lib/projects";
-
-const GRADIENTS = [
-  "from-violet/30 via-background to-cyan/20",
-  "from-cyan/25 via-background to-pink/20",
-  "from-pink/25 via-background to-violet/25",
-  "from-violet/20 via-background to-pink/15",
-];
+import { projectGradient } from "@/lib/theme";
 
 export default function ProjectCard({
   project,
@@ -54,6 +48,7 @@ export default function ProjectCard({
     <Link
       href={`/work/${project.slug}`}
       data-cursor="hover"
+      data-cursor-label="View"
       className="group block"
     >
       <div
@@ -63,9 +58,10 @@ export default function ProjectCard({
         className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border [transform-style:preserve-3d]"
       >
         <div
-          className={`absolute inset-0 bg-gradient-to-br ${GRADIENTS[index % GRADIENTS.length]} transition-transform duration-700 group-hover:scale-105`}
+          className={`absolute inset-0 bg-gradient-to-br ${projectGradient(index)} transition-transform duration-700 group-hover:scale-105`}
         />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.06),transparent_60%)]" />
+        <div className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full" />
         <span className="absolute left-6 top-6 font-mono-label text-xs text-muted">
           0{index + 1}
         </span>
@@ -82,7 +78,7 @@ export default function ProjectCard({
           <span className="font-mono-label text-xs text-cyan">
             {project.category}
           </span>
-          <h3 className="mt-2 text-2xl font-medium leading-tight text-foreground md:text-3xl">
+          <h3 className="mt-2 text-2xl font-bold leading-tight text-foreground md:text-4xl">
             {project.title}
           </h3>
         </div>

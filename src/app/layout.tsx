@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/providers/SmoothScroll";
 import CustomCursor from "@/components/ui/CustomCursor";
+import Intro from "@/components/ui/Intro";
+import CommandPalette from "@/components/ui/CommandPalette";
+import AiChat from "@/components/ui/AiChat";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
@@ -41,7 +44,10 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col bg-background text-foreground">
         <SmoothScroll>
+          <Intro />
           <CustomCursor />
+          <CommandPalette />
+          <AiChat />
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
