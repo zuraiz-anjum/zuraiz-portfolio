@@ -139,6 +139,7 @@ export const projects: Project[] = [
     year: "2025",
     summary:
       "A from-scratch exercise-recognition and rep-counting system built entirely from raw, unlabeled accelerometer and gyroscope data.",
+    cover: "/projects/ml-fitness-tracker/cover.png",
     stack: ["Python", "Scikit-learn", "SVM", "Random Forest", "Signal Processing"],
     role: "Sole engineer — data pipeline, modeling, algorithm design",
     overview:
