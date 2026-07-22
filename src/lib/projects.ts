@@ -69,6 +69,7 @@ export const projects: Project[] = [
     year: "2026",
     summary:
       "A platform where anyone can spin up an AI agent that joins live video meetings, talks in real time, and hands back a summary and transcript when it's over.",
+    cover: "/projects/ai-agent-saas/cover.png",
     stack: [
       "Next.js",
       "TypeScript",
