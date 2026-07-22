@@ -5,7 +5,7 @@ export type Project = {
   category: string;
   year: string;
   summary: string;
-  cover: string;
+  cover?: string;
   stack: string[];
   liveUrl?: string;
   role: string;
@@ -25,7 +25,7 @@ export const projects: Project[] = [
     year: "2026",
     summary:
       "A 26-agent LangGraph research assistant running 14 coordinated workflows, turning a natural-language query into a structured research report, complete with citations, comparison matrices, and visualizations.",
-    cover: "/projects/ares/cover.jpg",
+    cover: "/projects/ares/cover.png",
     stack: [
       "Python",
       "LangGraph",
@@ -69,7 +69,6 @@ export const projects: Project[] = [
     year: "2026",
     summary:
       "A platform where anyone can spin up an AI agent that joins live video meetings, talks in real time, and hands back a summary and transcript when it's over.",
-    cover: "/projects/ai-agent-saas/cover.jpg",
     stack: [
       "Next.js",
       "TypeScript",
@@ -109,7 +108,6 @@ export const projects: Project[] = [
     year: "2025",
     summary:
       "A benchmark asking how much model you actually need: how closely small, cheap language models can approximate large-scale performance on a sensitive, high-stakes classification task.",
-    cover: "/projects/small-vs-large-llms/cover.jpg",
     stack: ["NLP", "DistilBERT", "MentalBERT", "Flan-T5", "TF-IDF", "Scikit-learn"],
     role: "Sole researcher — data, modeling, evaluation",
     overview:
@@ -139,7 +137,6 @@ export const projects: Project[] = [
     year: "2025",
     summary:
       "A from-scratch exercise-recognition and rep-counting system built entirely from raw, unlabeled accelerometer and gyroscope data.",
-    cover: "/projects/ml-fitness-tracker/cover.jpg",
     stack: ["Python", "Scikit-learn", "SVM", "Random Forest", "Signal Processing"],
     role: "Sole engineer — data pipeline, modeling, algorithm design",
     overview:

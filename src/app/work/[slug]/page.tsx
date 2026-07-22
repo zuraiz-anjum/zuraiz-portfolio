@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Reveal from "@/components/ui/Reveal";
@@ -105,9 +106,22 @@ export default async function CaseStudyPage({
         </Reveal>
 
         <Reveal delay={0.1}>
-          <div
-            className={`mt-14 aspect-[16/9] rounded-2xl border border-border bg-gradient-to-br ${GRADIENTS[index % GRADIENTS.length]}`}
-          />
+          {project.cover ? (
+            <div className="relative mt-14 aspect-[16/9] overflow-hidden rounded-2xl border border-border">
+              <Image
+                src={project.cover}
+                alt={project.title}
+                fill
+                sizes="(min-width: 768px) 896px, 100vw"
+                className="object-cover"
+                priority
+              />
+            </div>
+          ) : (
+            <div
+              className={`mt-14 aspect-[16/9] rounded-2xl border border-border bg-gradient-to-br ${GRADIENTS[index % GRADIENTS.length]}`}
+            />
+          )}
         </Reveal>
 
         <div className="mt-16 flex flex-wrap gap-2">
