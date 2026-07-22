@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { getLenis } from "@/lib/lenisStore";
 import { projects } from "@/lib/projects";
+import { RESUME_MODAL_TOGGLE_EVENT } from "@/components/ui/ResumeViewer";
 
 const HEADER_OFFSET = -88;
 
@@ -90,9 +91,9 @@ export default function CommandPalette() {
     const linkCommands: Command[] = [
       {
         id: "link-resume",
-        label: "Open Resume (PDF)",
+        label: "View Resume",
         group: "Resume",
-        run: () => window.open("/resume.pdf", "_blank", "noopener,noreferrer"),
+        run: () => window.dispatchEvent(new CustomEvent(RESUME_MODAL_TOGGLE_EVENT)),
       },
       {
         id: "link-email",

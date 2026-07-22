@@ -8,6 +8,7 @@ import Magnetic from "@/components/ui/Magnetic";
 import LiveClock from "./LiveClock";
 import { getLenis } from "@/lib/lenisStore";
 import { COMMAND_PALETTE_TOGGLE_EVENT } from "@/components/ui/CommandPalette";
+import { RESUME_MODAL_TOGGLE_EVENT } from "@/components/ui/ResumeViewer";
 
 const HEADER_OFFSET = -88;
 
@@ -56,12 +57,11 @@ export default function Header() {
             </ScrambleLink>
           ))}
           <Magnetic strength={0.4}>
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
               data-cursor="hover"
               data-cursor-label="View"
+              onClick={() => window.dispatchEvent(new CustomEvent(RESUME_MODAL_TOGGLE_EVENT))}
               className="group flex items-center gap-1.5 rounded-full border border-border px-4 py-2 font-mono-label text-xs text-foreground transition-all duration-300 hover:border-violet hover:text-violet hover:shadow-[0_0_24px_-8px_rgba(167,139,250,0.7)]"
             >
               Resume
@@ -71,7 +71,7 @@ export default function Header() {
               >
                 →
               </span>
-            </a>
+            </button>
           </Magnetic>
           <LiveClock className="font-mono-label text-xs text-muted" />
           <button
@@ -134,15 +134,16 @@ export default function Header() {
             {link.label}
           </Link>
         ))}
-        <a
-          href="/resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => setOpen(false)}
+        <button
+          type="button"
+          onClick={() => {
+            setOpen(false);
+            window.dispatchEvent(new CustomEvent(RESUME_MODAL_TOGGLE_EVENT));
+          }}
           className="flex items-center gap-2 font-mono-label text-lg text-foreground"
         >
           Resume <span aria-hidden>→</span>
-        </a>
+        </button>
         <a
           href="mailto:zuraizwork@gmail.com"
           onClick={() => setOpen(false)}

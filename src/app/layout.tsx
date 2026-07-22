@@ -6,6 +6,7 @@ import CustomCursor from "@/components/ui/CustomCursor";
 import Intro from "@/components/ui/Intro";
 import CommandPalette from "@/components/ui/CommandPalette";
 import AiChat from "@/components/ui/AiChat";
+import ResumeViewer from "@/components/ui/ResumeViewer";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
@@ -48,6 +49,7 @@ export default function RootLayout({
           <CustomCursor />
           <CommandPalette />
           <AiChat />
+          <ResumeViewer />
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />

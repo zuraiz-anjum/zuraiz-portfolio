@@ -1,6 +1,9 @@
+"use client";
+
 import Reveal from "@/components/ui/Reveal";
 import ScrambleLink from "@/components/ui/ScrambleLink";
 import Magnetic from "@/components/ui/Magnetic";
+import { RESUME_MODAL_TOGGLE_EVENT } from "@/components/ui/ResumeViewer";
 
 export default function Contact() {
   return (
@@ -49,12 +52,13 @@ export default function Contact() {
               </span>
               <div className="mt-2">
                 <Magnetic strength={0.35} className="inline-block">
-                  <a
-                    href="/resume.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    type="button"
                     data-cursor="hover"
                     data-cursor-label="View"
+                    onClick={() =>
+                      window.dispatchEvent(new CustomEvent(RESUME_MODAL_TOGGLE_EVENT))
+                    }
                     className="group inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-sm text-foreground transition-all duration-300 hover:border-violet hover:text-violet hover:shadow-[0_0_20px_-8px_rgba(167,139,250,0.7)]"
                   >
                     View Resume
@@ -64,7 +68,7 @@ export default function Contact() {
                     >
                       →
                     </span>
-                  </a>
+                  </button>
                 </Magnetic>
               </div>
             </div>
