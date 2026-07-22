@@ -99,11 +99,12 @@ const ParticleSphere = forwardRef<ParticleSphereHandle>(
       const resizeObserver = new ResizeObserver(resize);
       resizeObserver.observe(container);
 
-      let rafId: number;
+      let rafId = 0;
+      let running = false;
       const clock = new THREE.Clock();
 
-      const animate = () => {
-        rafId = requestAnimationFrame(animate);
+      const tick = () => {
+        rafId = requestAnimationFrame(tick);
         const delta = clock.getDelta();
         const speed = prefersReducedMotion
           ? 0.03
@@ -112,20 +113,39 @@ const ParticleSphere = forwardRef<ParticleSphereHandle>(
         points.rotation.x = Math.sin(progressRef.current * Math.PI) * 0.2;
         renderer.render(scene, camera);
       };
-      animate();
+
+      const start = () => {
+        if (running) return;
+        running = true;
+        clock.getDelta();
+        tick();
+      };
+      const stop = () => {
+        running = false;
+        cancelAnimationFrame(rafId);
+      };
+
+      let isIntersecting = false;
+      const intersectionObserver = new IntersectionObserver(
+        ([entry]) => {
+          isIntersecting = entry.isIntersecting;
+          if (isIntersecting && !document.hidden) start();
+          else stop();
+        },
+        { threshold: 0 }
+      );
+      intersectionObserver.observe(container);
 
       const onVisibility = () => {
-        if (document.hidden) {
-          cancelAnimationFrame(rafId);
-        } else {
-          animate();
-        }
+        if (document.hidden) stop();
+        else if (isIntersecting) start();
       };
       document.addEventListener("visibilitychange", onVisibility);
 
       return () => {
-        cancelAnimationFrame(rafId);
+        stop();
         document.removeEventListener("visibilitychange", onVisibility);
+        intersectionObserver.disconnect();
         resizeObserver.disconnect();
         geometry.dispose();
         material.dispose();

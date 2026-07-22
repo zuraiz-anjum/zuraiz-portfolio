@@ -71,33 +71,55 @@ export default function HeroCanvas() {
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(container);
 
-    let rafId: number;
+    let rafId = 0;
+    let running = false;
     const clock = new THREE.Clock();
 
-    const animate = () => {
-      rafId = requestAnimationFrame(animate);
+    const tick = () => {
+      rafId = requestAnimationFrame(tick);
       const delta = clock.getDelta();
       uniforms.uTime.value += prefersReducedMotion ? delta * 0.15 : delta;
       uniforms.uMouse.value.lerp(targetMouse, 0.04);
       uniforms.uScroll.value += (targetScroll - uniforms.uScroll.value) * 0.06;
       renderer.render(scene, camera);
     };
-    animate();
+
+    const start = () => {
+      if (running) return;
+      running = true;
+      clock.getDelta(); // discard time accumulated while paused
+      tick();
+    };
+    const stop = () => {
+      running = false;
+      cancelAnimationFrame(rafId);
+    };
+
+    let isIntersecting = true;
+    const intersectionObserver = new IntersectionObserver(
+      ([entry]) => {
+        isIntersecting = entry.isIntersecting;
+        if (isIntersecting && !document.hidden) start();
+        else stop();
+      },
+      { threshold: 0 }
+    );
+    intersectionObserver.observe(container);
 
     const onVisibility = () => {
-      if (document.hidden) {
-        cancelAnimationFrame(rafId);
-      } else {
-        animate();
-      }
+      if (document.hidden) stop();
+      else if (isIntersecting) start();
     };
     document.addEventListener("visibilitychange", onVisibility);
 
+    start();
+
     return () => {
-      cancelAnimationFrame(rafId);
+      stop();
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("scroll", onScroll);
       document.removeEventListener("visibilitychange", onVisibility);
+      intersectionObserver.disconnect();
       resizeObserver.disconnect();
       geometry.dispose();
       material.dispose();
