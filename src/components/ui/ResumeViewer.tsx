@@ -46,7 +46,20 @@ export default function ResumeViewer() {
       pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
       try {
-        const loadingTask = pdfjsLib.getDocument({ url: "/resume.pdf" });
+        // Fetch the whole file up front instead of letting pdf.js stream it
+        // via HTTP range requests — that streaming path can hang silently on
+        // some mobile networks/browsers instead of failing, leaving the
+        // viewer stuck on "Loading…" forever. A plain buffer + hard timeout
+        // guarantees we always land on either "ready" or "error".
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 15000);
+        const res = await fetch("/resume.pdf", { signal: controller.signal });
+        clearTimeout(timeout);
+        if (!res.ok) throw new Error("Failed to fetch resume.pdf");
+        const data = await res.arrayBuffer();
+        if (cancelled) return;
+
+        const loadingTask = pdfjsLib.getDocument({ data });
         const doc = await loadingTask.promise;
         if (cancelled) {
           loadingTask.destroy();
